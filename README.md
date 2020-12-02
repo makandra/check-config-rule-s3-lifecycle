@@ -10,7 +10,7 @@ You need [serverless](https://www.serverless.com/) installed locally (or on your
 
 # Deployment
 
-Before you deploy you need to have a `parameters.yml`. You can copy the `parameters.yml.example` as a starting point. You should create a new git branch when adding a `parameters.yml` because it stores deployment dependend configuration (Account specific `ARN`s). Please check for existing branches before you start. All parameters need to have a value (even though some might not be used). If you omit a parameter the validation of the generated Cloudformation template will fail. Otherwise the deploy will fail.
+Before you deploy you need to have a `parameters.yml`. You can copy the `parameters.yml.example` as a starting point. You should create a new git branch when adding a `parameters.yml` because it stores deployment dependent configuration (Account specific `ARN`s). Please check for existing branches before you start. All parameters need to have a value (even though some might not be used). If you omit a parameter the validation of the generated Cloudformation template will fail. Otherwise the deploy will fail.
 
 ## Parameters
 
@@ -39,7 +39,7 @@ The `ARN` of the IAM role which will publish a SNS message via SSM is expected. 
 - `sns:GetSMSAttributes`
 - `sns:ListPlatformApplications`
 
-Amazons default policies `AmazonEC2RoleforSSM` and `AmazonSSMAutomationRole` should be assigned to the role too. You may create a role with fewer permissions, but that's beyond the scope of this readme.
+Amazon's default policies `AmazonEC2RoleforSSM` and `AmazonSSMAutomationRole` should be assigned to the role too. You may create a role with fewer permissions, but that's beyond the scope of this README.
 
 ### `snsTopic`
 
@@ -47,19 +47,19 @@ The `ARN` of the snsTopic which will receive the notifications bei the remediati
 
 ## Deploy
 
-The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behaviour and how it works. If you just want to get startet with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda. 
+The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behavior and how it works. If you just want to get startet with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda.
 
 Serverless compares your function with the already deployed function (if there is any) via checksums when you attempt a deploy. If there is no change, the deploy will not be executed. If you made changes to your configuration or the Cloudformation configuration it may not be recognized. You can force the deploy then via `serverless deploy --force`. 
 
 # Development requirements
 
-You need the deploy requirements and [Poetry](https://python-poetry.org/). Also you shoujld have something like [pyenv](https://github.com/pyenv/pyenv) to install a suitable python version. Dependencies like `flake8` and `pytest` will be installed via `Poetry`.
+You need the deploy requirements and [Poetry](https://python-poetry.org/). Also you should have something like [pyenv](https://github.com/pyenv/pyenv) to install a suitable python version. Dependencies like `flake8` and `pytest` will be installed via `Poetry`.
 
 ## Tests and linting
 
 For linting you can run `poetry run flake8`
 
-To run tests you can ru n`poetry run py.test`
-Please always run tests from the repository root dir to avoid file path issues (there is no smart logic to detec from which directory you run your tests).
+To run tests you can run `poetry run py.test`
+Please always run tests from the repository root dir to avoid file path issues (there is no smart logic to detect from which directory you run your tests).
 
 The is no 100% test coverage.
