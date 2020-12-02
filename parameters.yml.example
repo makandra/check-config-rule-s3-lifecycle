@@ -1,0 +1,3 @@
+createConfigResources: false
+ssmServiceRole: 'arn:aws:iam::123456789:role/SSM-ServiceRole'
+snsTopic: 'arn:aws:sns:eu-central-1:123456789:monitoringtopic'

@@ -1,0 +1,53 @@
+{
+    "configurationItemDiff": null,
+    "configurationItem": {
+        "relatedEvents": [],
+        "relationships": [],
+        "configuration": {
+            "name": "bestBucket",
+            "owner": {
+                "displayName": null,
+                "id": "worstid"
+            },
+            "creationDate": "2019-06-11T09:04:23.000Z"
+        },
+        "supplementaryConfiguration": {
+            "AccessControlList": "{\"grantSet\":null,\"grantList\":[{\"grantee\":{\"id\":\"bestid\",\"displayName\":null},\"permission\":\"FullControl\"},{\"grantee\":\"AllUsers\",\"permission\":\"Read\"}],\"owner\":{\"displayName\":null,\"id\":\"betterid\"},\"isRequesterCharged\":false}",
+            "BucketAccelerateConfiguration": {
+                "status": null
+            },
+            "BucketLoggingConfiguration": {
+                "destinationBucketName": null,
+                "logFilePrefix": null
+            },
+            "BucketNotificationConfiguration": {
+                "configurations": {}
+            },
+            "BucketPolicy": {
+                "policyText": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AddPerm\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:GetObject\",\"Resource\":\"arn:aws:s3:::bestBucket/*\"}]}"
+            },
+            "BucketVersioningConfiguration": {
+                "status": "Suspended",
+                "isMfaDeleteEnabled": null
+            },
+            "IsRequesterPaysEnabled": false
+        },
+        "tags": {},
+        "configurationItemVersion": "1.3",
+        "configurationItemCaptureTime": "2020-11-27T09:27:57.286Z",
+        "configurationStateId": 1606469277286,
+        "awsAccountId": "812204270170",
+        "configurationItemStatus": "OK",
+        "resourceType": "AWS::S3::Bucket",
+        "resourceId": "bestBucket",
+        "resourceName": "bestBucket",
+        "ARN": "arn:aws:s3:::bestBucket",
+        "awsRegion": "eu-central-1",
+        "availabilityZone": "Regional",
+        "configurationStateMd5Hash": "",
+        "resourceCreationTime": "2019-06-11T09:04:23.000Z"
+    },
+    "notificationCreationTime": "2020-12-02T08:57:42.545Z",
+    "messageType": "ConfigurationItemChangeNotification",
+    "recordVersion": "1.3"
+}

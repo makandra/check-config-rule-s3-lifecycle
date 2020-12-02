@@ -1,0 +1,84 @@
+service: 'check-config-rule-s3-lifecycle'
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  stage: prod
+  region: eu-central-1
+  runtime: python3.8
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:GetObject"
+      Resource: "arn:aws:s3:::*/AWSLogs/*/Config/*"
+    - Effect: "Allow"
+      Action:
+        - "config:Put*"
+        - "config:Get*"
+        - "config:List*"
+        - "config:Describe*"
+        - "config:BatchGet*"
+        - "config:Select*"
+      Resource: "*"
+
+functions:
+  lambda_handler:
+    handler: handler.lambda_handler
+    memorySize: 128
+
+# you can add CloudFormation resource templates here
+resources:
+  Conditions:
+      CreateConfigResources: !Equals [ "${file(parameters.yml):createConfigResources}", true ]
+  Resources:
+    LambdaConfigInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !GetAtt LambdaUnderscorehandlerLambdaFunction.Arn
+        Action: lambda:InvokeFunction
+        Principal: config.amazonaws.com
+        SourceAccount: !Ref "AWS::AccountId"
+    ConfigRuleForS3LifecyclePolicies: 
+      Type: AWS::Config::ConfigRule
+      Condition: CreateConfigResources
+      DependsOn: LambdaConfigInvokePermission
+      Properties: 
+        ConfigRuleName: 'check-versioning-s3-bucket-lifecycle-policy'
+        InputParameters: 
+          tag1Key: CostCenter
+        Scope: 
+          ComplianceResourceTypes: 
+            - "AWS::S3::Bucket"
+        Source: 
+          Owner: CUSTOM_LAMBDA
+          SourceIdentifier: !GetAtt LambdaUnderscorehandlerLambdaFunction.Arn
+          SourceDetails:
+            - EventSource: 'aws.config'
+              MessageType: 'ConfigurationItemChangeNotification'
+    RemediateNotification:
+      Type: AWS::Config::RemediationConfiguration
+      Condition: CreateConfigResources
+      Properties:
+          Automatic: True
+          MaximumAutomaticAttempts: 1
+          RetryAttemptSeconds: 3600
+          ConfigRuleName: !Ref ConfigRuleForS3LifecyclePolicies
+          Parameters:
+              AutomationAssumeRole:
+                  StaticValue:
+                      Values: 
+                      - ${file(parameters.yml):ssmServiceRole}
+              MessagePart1:
+                  StaticValue:
+                      Values:
+                          - 'The following S3 bucket is not compliant with the Config Rule check-versioning-s3-bucket-lifecycle-policy:'
+              MessagePart2:
+                ResourceValue:
+                  Value: 'RESOURCE_ID'
+              TopicArn:
+                StaticValue:
+                  Values:
+                    - ${file(parameters.yml):snsTopic}
+          TargetId: "Publish-SNS-Message-with-2-message-parts"
+          TargetType: "SSM_DOCUMENT"
+          TargetVersion: "1"

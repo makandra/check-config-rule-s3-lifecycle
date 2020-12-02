@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "check-config-rule-s3-lifecycle"
+version = "0.1.0"
+description = "Check S3 Buckets with versioning enabled if a lifecycle rule exists"
+authors = ["Claus Riegg <claus.riegg@makandra.de>"]
+
+[tool.poetry.dependencies]
+python = "3.7.*"
+boto3 = "^1.16.26"
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.6.0"
+pytest = "^6.1.2"
+flake8 = "^3.8.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
