@@ -49,11 +49,7 @@ The `ARN` of the snsTopic which will receive the notifications by the remediatio
 
 ## Deploy
 
-<<<<<<< HEAD
-The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behavior and how it works. If you just want to get startet with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda.
-=======
-The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behaviour and how it works. If you just want to get started with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda. 
->>>>>>> fixed some typos
+The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behaviour and how it works. If you just want to get started with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda. If you are using multiple profiles be sure to specify that in the env variable `AWS_PROFILE="<profilename>" serverless deploy`.
 
 Serverless compares your function with the already deployed function (if there is any) via checksums when you attempt a deploy. If there is no change, the deploy will not be executed. If you made changes to your configuration or the Cloudformation configuration it may not be recognized. You can force the deploy then via `serverless deploy --force`. 
 
