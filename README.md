@@ -8,6 +8,8 @@ Based on https://github.com/soroushatarod/aws-config-rule-public-security-group
 
 You need [serverless](https://www.serverless.com/) installed locally (or on your deployment/CI/CD server). 
 
+You need to setup [AWS Config](https://aws.amazon.com/config/) (and therefore [Cloudtrail](https://aws.amazon.com/cloudtrail/) to get it to work. For the SNS notifcations you have to enable [SSM](https://aws.amazon.com/systems-manager/).
+
 # Deployment
 
 Before you deploy you need to have a `parameters.yml`. You can copy the `parameters.yml.example` as a starting point. You should create a new git branch when adding a `parameters.yml` because it stores deployment dependent configuration (Account specific `ARN`s). Please check for existing branches before you start. All parameters need to have a value (even though some might not be used). If you omit a parameter the validation of the generated Cloudformation template will fail. Otherwise the deploy will fail.
