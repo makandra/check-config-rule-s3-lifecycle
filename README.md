@@ -45,11 +45,15 @@ Amazon's default policies `AmazonEC2RoleforSSM` and `AmazonSSMAutomationRole` sh
 
 ### `snsTopic`
 
-The `ARN` of the snsTopic which will receive the notifications bei the remediation action. You need to create this snsTopic yourself.
+The `ARN` of the snsTopic which will receive the notifications by the remediation action. You need to create this snsTopic yourself.
 
 ## Deploy
 
+<<<<<<< HEAD
 The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behavior and how it works. If you just want to get startet with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda.
+=======
+The deploy is a usual `serverless` deployment. You should read the documentation how you can modify the deployment behaviour and how it works. If you just want to get started with this without getting into `serverless` you can use `serverless deploy` to deploy the lambda. 
+>>>>>>> fixed some typos
 
 Serverless compares your function with the already deployed function (if there is any) via checksums when you attempt a deploy. If there is no change, the deploy will not be executed. If you made changes to your configuration or the Cloudformation configuration it may not be recognized. You can force the deploy then via `serverless deploy --force`. 
 
@@ -64,4 +68,4 @@ For linting you can run `poetry run flake8`
 To run tests you can run `poetry run py.test`
 Please always run tests from the repository root dir to avoid file path issues (there is no smart logic to detect from which directory you run your tests).
 
-The is no 100% test coverage.
+There is no 100% test coverage.
