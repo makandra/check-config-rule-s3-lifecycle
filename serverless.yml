@@ -13,12 +13,7 @@ provider:
       Resource: "arn:aws:s3:::*/AWSLogs/*/Config/*"
     - Effect: "Allow"
       Action:
-        - "config:Put*"
-        - "config:Get*"
-        - "config:List*"
-        - "config:Describe*"
-        - "config:BatchGet*"
-        - "config:Select*"
+        - "config:PutEvaluations"
       Resource: "*"
 
 functions:
