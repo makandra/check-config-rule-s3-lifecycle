@@ -21,6 +21,12 @@ functions:
     handler: handler.lambda_handler
     memorySize: 128
 
+package:
+  include:
+    - handler.py
+  exclude:
+    - ./**
+
 # you can add CloudFormation resource templates here
 resources:
   Conditions:
